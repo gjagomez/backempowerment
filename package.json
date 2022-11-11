@@ -1,0 +1,21 @@
+{
+  "name": "empowerment",
+  "version": "1.0.0",
+  "description": "Servicios web empowerment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.10.3",
+    "apollo-server-cache-memcached": "^3.3.1",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20"
+  }
+}
