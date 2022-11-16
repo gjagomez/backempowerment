@@ -14,10 +14,18 @@ async function delEmp({id}){
 }
 async function getEmp(){
     const iSql = `call empowerment.sp_empselect`;
-    console.log(iSql)
     const result = await pool.query(iSql);
     return result[0][0];
 }
+async function createEnc({empid,encno}){
+
+}
+async function endEnc({}){
+
+}
+
+
+
 module.exports={
     saveEmp,
     delEmp,
