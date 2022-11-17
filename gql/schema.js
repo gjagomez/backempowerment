@@ -2,13 +2,12 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    login: [usuarios]
-    listEmp: [empresas]
+
+    empresasAll: [empresas]
   }
   type Mutation {
-    intoUser(input: inputusuario): usuarios
-    saveEmp(input: inputemp): [empresas]
-    delEmp(input: inputId): [empresas]
+    empresaAd(input: inputemp): empresas
+    empresaDel(input: inputId): [empresas]
   }
 
   type usuarios {

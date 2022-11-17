@@ -1,33 +1,33 @@
-const conn=require("../config/server");
-const pool=conn();
+const conn = require("../config/server");
+const pool = conn();
+const { PrismaClient, empresa } = require("@prisma/client");
+prisma = new PrismaClient();
 
-async function saveEmp({idemp,
-    empresa}){
-    const iSql = `CALL sp_empinsert ('${idemp}','${empresa}')`;
-    const result = await pool.query(iSql);
-    return result[0][0];
-}
-async function delEmp({id}){
-    const iSql = `CALL sp_empdel('${id}')`;
-    const result = await pool.query(iSql);
-    return result[0][0];
-}
-async function getEmp(){
-    const iSql = `call empowerment.sp_empselect`;
-    const result = await pool.query(iSql);
-    return result[0][0];
-}
-async function createEnc({empid,encno}){
-
-}
-async function endEnc({}){
-
+async function saveEmp(input) {
+  const enc = await prisma.empresa.create({
+    data:input
+  });
+return enc
 }
 
-
-
-module.exports={
-    saveEmp,
-    delEmp,
-    getEmp
+async function delEmp({ id }) {
+   const deleteEmp=await prisma.empresa.deleteMany({
+      where :{
+         idemp:id
+      }
+   })
+   const allUsers = await prisma.empresa.findMany();
+  return allUsers;
 }
+async function getEmp() {
+  const allUsers = await prisma.empresa.findMany();
+  return allUsers;
+}
+async function createEnc({ empid, encno }) {}
+async function endEnc({}) {}
+
+module.exports = {
+  saveEmp,
+  delEmp,
+  getEmp,
+};

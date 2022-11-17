@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cat_preg {
+  id         Int       @id @default(autoincrement())
+  pregunta   String?   @db.VarChar(455)
+  tipo       String?   @db.VarChar(255)
+  corr       Int?
+  descrip    String?   @db.VarChar(255)
+  createat   DateTime  @default(dbgenerated("(curdate())")) @db.Date
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+}
+
+model catemp {
+  id           Int       @default(autoincrement())
+  idemp        String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
+  empresa      String?   @db.VarChar(255)
+  codemp       Int?
+  nombre       String?   @db.VarChar(255)
+  puesto       String?   @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  codje        Int?
+  nomje        String?   @db.VarChar(255)
+  puestoje     String?   @db.VarChar(255)
+  emailje      String?   @db.VarChar(255)
+  departamento String?   @db.VarChar(255)
+  region       String?   @db.VarChar(255)
+  sucursal     String?   @db.VarChar(255)
+  antiguedad   String?   @db.VarChar(255)
+  sexo         String?   @db.VarChar(20)
+  created_at   DateTime  @default(now()) @db.Timestamp(0)
+  updated_at   DateTime? @default(now()) @db.DateTime(0)
+
+  @@id([id, idemp])
+}
+
+model empresa {
+  id         Int       @id @default(autoincrement())
+  idemp      String    @default("") @db.VarChar(245)
+  empresa    String?   @db.VarChar(145)
+  estado     Int?      @default(0)
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+
+  @@index([idemp, id], map: "id")
+}
+
+model encexist {
+  id         Int       @default(autoincrement())
+  idemp      Int       @unique(map: "UK_encexist_idemp")
+  emp        String?   @db.VarChar(255)
+  encno      Int?
+  estado     Int?      @default(0)
+  fecin      DateTime? @db.Date
+  fecfin     DateTime? @db.Date
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+
+  @@id([id, idemp])
+}
