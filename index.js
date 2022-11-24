@@ -2,6 +2,7 @@ const { ApolloServer } = require('apollo-server')
 const typeDefs = require('./gql/schema')
 const resolvers = require('./gql/resolver')
 const { MemcachedCache } = require('apollo-server-cache-memcached')
+
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
