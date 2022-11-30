@@ -12,6 +12,8 @@ const resolver = {
     createEnc: (_, { input }) => Encuesta.createEnc(input),
     getExistenc: (_, { input }) => Encuesta.getEnc(input),
     loginAdmin: (_, { input }) => LoginEmp.LoginAdmin(input),
+    createAdmin:(_,{input})=>LoginEmp.CreateUser(input),
+    empadminList:(_,{input})=>LoginEmp.ListUserAdmin(input),
   },
 }
 

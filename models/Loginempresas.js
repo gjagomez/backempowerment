@@ -15,15 +15,26 @@ async function LoginAdmin({ email, clave }) {
   return Usuario
 }
 async function CreateUser(input) {
-  const addUseradmin = await prisma.usadmin.create({
-    data: input,
+ const addUseradmin = await prisma.usadmin.create({
+     data: input,
+   })
+
+   console.log(addUseradmin)
+   const {empresa}=addUseradmin
+   const ListUser = await prisma.usadmin.findMany({
+    where: {
+      empresa: {
+        equals: empresa, // Default value: default
+      },
+    },
   })
+  return ListUser
 }
-async function ListUserAdmin({ idemp }) {
+async function ListUserAdmin({ id }) {
   const ListUser = await prisma.usadmin.findMany({
     where: {
-      codemp: {
-        equals: idemp, // Default value: default
+      empresa: {
+        equals: id, // Default value: default
       },
     },
   })

@@ -11,6 +11,8 @@ const typeDefs = gql`
     createEnc(input: inputencexist): [encexist]
     getExistenc(input: inputidN): [encexist]
     loginAdmin(input: inputLogin): [login]
+    createAdmin(input:inputAdminSave):[login]
+    empadminList(input:inputId):[login]
   }
 
   type usuarios {
@@ -49,6 +51,13 @@ const typeDefs = gql`
     estado: Int
     rol: String
   }
+  input inputAdminSave{
+  idemp:String    
+  empresa:String
+  email:String   
+  nombre:String   
+  clave:String   
+  }
   type empresas {
     id: ID
     idemp: String
@@ -83,7 +92,6 @@ const typeDefs = gql`
     id: Int
     idemp: String
     empresa: String
-    codemp: Int
     email: String
     nombre: String
     clave: String

@@ -85,7 +85,6 @@ model usadmin {
   id         Int       @default(autoincrement())
   idemp      String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
   empresa    String?   @db.VarChar(255)
-  codemp     Int?
   email      String?   @db.VarChar(255)
   nombre     String?   @db.VarChar(255)
   clave      String?   @db.VarChar(255)
