@@ -1,17 +1,11 @@
-const { PrismaClient, us_admin } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 prisma = new PrismaClient()
 
-
-async function login({ email,clave }) {
-    const getLogin = await prisma.us_admin.findMany({
-        where: {
-            email: email,
-        },
-    })
-    console.log(getLogin)
-    return getLogin
-  }
-  module.exports = {
-    login,
-  }
-  
+async function login({ email, clave }) {
+  console.log(email)
+  const allUsers = await prisma.us_admin.findMany()
+  return allUsers
+}
+module.exports = {
+  login,
+}

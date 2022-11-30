@@ -1,4 +1,4 @@
-const { PrismaClient, cat_preg, encexist } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 prisma = new PrismaClient()
 
 async function getPreguntas() {

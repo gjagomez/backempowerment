@@ -1,6 +1,6 @@
 const conn = require('../config/server')
 const pool = conn()
-const { PrismaClient, empresa } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 prisma = new PrismaClient()
 
 async function saveEmp(input) {
