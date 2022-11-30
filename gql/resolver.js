@@ -1,6 +1,6 @@
 const empreSas = require('../models/Empresas')
 const Encuesta = require('../models/Encuesta')
-const EncLogin=require('../models/Encadmin')
+const LoginEmp = require('../models/Loginempresas')
 const resolver = {
   Query: {
     empresasAll: () => empreSas.getEmp(),
@@ -11,7 +11,7 @@ const resolver = {
     empresaDel: (_, { input }) => empreSas.delEmp(input),
     createEnc: (_, { input }) => Encuesta.createEnc(input),
     getExistenc: (_, { input }) => Encuesta.getEnc(input),
-    loginEnc:(_,{input})=>EncLogin.login(input),
+    loginAdmin: (_, { input }) => LoginEmp.LoginAdmin(input),
   },
 }
 

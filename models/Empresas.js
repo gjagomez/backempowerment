@@ -1,5 +1,3 @@
-const conn = require('../config/server')
-const pool = conn()
 const { PrismaClient } = require('@prisma/client')
 prisma = new PrismaClient()
 

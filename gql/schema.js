@@ -10,7 +10,7 @@ const typeDefs = gql`
     empresaDel(input: inputId): [empresas]
     createEnc(input: inputencexist): [encexist]
     getExistenc(input: inputidN): [encexist]
-    loginEnc(input:inputLogin):[login]
+    loginAdmin(input: inputLogin): [login]
   }
 
   type usuarios {
@@ -37,17 +37,17 @@ const typeDefs = gql`
     fecin: String
     fecfin: String
   }
-  input inputLogin{
-    email:String
-    clave:String
+  input inputLogin {
+    email: String
+    clave: String
   }
-  input inputCreaAd{    
-  idemp:     Int
-  codemp:    Int
-  email:     String  
-  clave:     String   
-  estado:    Int
-  rol:       String   
+  input inputCreaAd {
+    idemp: Int
+    codemp: Int
+    email: String
+    clave: String
+    estado: Int
+    rol: String
   }
   type empresas {
     id: ID
@@ -79,17 +79,16 @@ const typeDefs = gql`
     created_at: String
     updated_at: String
   }
-  type login{
-  id:        Int     
-  idemp:     Int
-  codemp:    Int
-  email:     String  
-  clave:     String  
-  estado:    Int
-  rol:       String  
-  create_at: String 
-  update_at: String 
-
+  type login {
+    id: Int
+    idemp: String
+    empresa: String
+    codemp: Int
+    email: String
+    nombre: String
+    clave: String
+    created_at: String
+    updated_at: String
   }
 `
 

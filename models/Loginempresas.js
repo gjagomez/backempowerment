@@ -1,5 +1,5 @@
 const { PrismaClient } = require('@prisma/client')
-prisma = new PrismaClient()
+const prisma = new PrismaClient()
 
 async function LoginAdmin({ email, clave }) {
   const Usuario = await prisma.usadmin.findMany({
@@ -14,7 +14,23 @@ async function LoginAdmin({ email, clave }) {
   })
   return Usuario
 }
-async function CreateUser(input) {}
+async function CreateUser(input) {
+  const addUseradmin = await prisma.usadmin.create({
+    data: input,
+  })
+}
+async function ListUserAdmin({ idemp }) {
+  const ListUser = await prisma.usadmin.findMany({
+    where: {
+      codemp: {
+        equals: idemp, // Default value: default
+      },
+    },
+  })
+  return ListUser
+}
 module.exports = {
   LoginAdmin,
+  CreateUser,
+  ListUserAdmin,
 }
