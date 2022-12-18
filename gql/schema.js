@@ -11,6 +11,7 @@ const typeDefs = gql`
     createEnc(input: inputencexist): [encexist]
     getExistenc(input: inputidN): [encexist]
     loginAdmin(input: inputLogin): [login]
+    empresaEmpAd(input: inputEmpAdd): mensaje
   }
 
   type usuarios {
@@ -20,14 +21,14 @@ const typeDefs = gql`
     nombre: String
   }
   input inputId {
-    id: String
+    id: String!
   }
   input inputidN {
     id: Int!
   }
   input inputemp {
-    idemp: String
-    empresa: String
+    idemp: String!
+    empresa: String!
   }
 
   input inputencexist {
@@ -49,6 +50,9 @@ const typeDefs = gql`
     estado: Int
     rol: String
   }
+  input inputEmpAdd {
+    json: String!
+  }
   type empresas {
     id: ID
     idemp: String
@@ -67,6 +71,9 @@ const typeDefs = gql`
     createat: String
     created_at: String
     updated_at: String
+  }
+  type mensaje {
+    mensaje: String
   }
   type encexist {
     id: ID

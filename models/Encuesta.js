@@ -6,13 +6,22 @@ async function getPreguntas() {
   return allPreg
 }
 async function createEnc(input) {
+  const { idemp, emp, encno, fecin, fecfin } = input
+
   const enc = await prisma.encexist.create({
-    data: input,
+    data: {
+      idemp: idemp,
+      emp: emp,
+      encno: encno,
+      fecin: new Date(fecin),
+      fecfin: new Date(fecfin),
+    },
   })
-  const { idemp } = enc
+
+  const { idempre } = enc
   const getEncExist = await prisma.encexist.findMany({
     where: {
-      idemp: idemp,
+      idemp: idempre,
     },
   })
   return getEncExist

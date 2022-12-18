@@ -12,6 +12,7 @@ const resolver = {
     createEnc: (_, { input }) => Encuesta.createEnc(input),
     getExistenc: (_, { input }) => Encuesta.getEnc(input),
     loginAdmin: (_, { input }) => LoginEmp.LoginAdmin(input),
+    empresaEmpAd: (_, { input }) => empreSas.createEmpleado(input),
   },
 }
 

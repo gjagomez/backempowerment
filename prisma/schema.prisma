@@ -18,29 +18,6 @@ model cat_preg {
   updated_at DateTime? @default(now()) @db.DateTime(0)
 }
 
-model catemp {
-  id           Int       @default(autoincrement())
-  idemp        String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
-  empresa      String?   @db.VarChar(255)
-  codemp       Int?
-  nombre       String?   @db.VarChar(255)
-  puesto       String?   @db.VarChar(255)
-  email        String?   @db.VarChar(255)
-  codje        Int?
-  nomje        String?   @db.VarChar(255)
-  puestoje     String?   @db.VarChar(255)
-  emailje      String?   @db.VarChar(255)
-  departamento String?   @db.VarChar(255)
-  region       String?   @db.VarChar(255)
-  sucursal     String?   @db.VarChar(255)
-  antiguedad   String?   @db.VarChar(255)
-  sexo         String?   @db.VarChar(20)
-  created_at   DateTime  @default(now()) @db.Timestamp(0)
-  updated_at   DateTime? @default(now()) @db.DateTime(0)
-
-  @@id([id, idemp])
-}
-
 model empresa {
   id         Int       @id @default(autoincrement())
   idemp      String    @default("") @db.VarChar(245)
@@ -85,12 +62,34 @@ model usadmin {
   id         Int       @default(autoincrement())
   idemp      String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
   empresa    String?   @db.VarChar(255)
-  codemp     Int?
   email      String?   @db.VarChar(255)
   nombre     String?   @db.VarChar(255)
   clave      String?   @db.VarChar(255)
   created_at DateTime  @default(now()) @db.Timestamp(0)
   updated_at DateTime? @default(now()) @db.DateTime(0)
+
+  @@id([id, idemp])
+}
+
+model catemp {
+  id           Int       @default(autoincrement())
+  idemp        String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
+  empresa      String?   @db.VarChar(255)
+  codemp       String?   @db.VarChar(255)
+  nombre       String?   @db.VarChar(255)
+  puesto       String?   @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  codje        String?   @db.VarChar(255)
+  nomje        String?   @db.VarChar(255)
+  puestoje     String?   @db.VarChar(255)
+  emailje      String?   @db.VarChar(255)
+  departamento String?   @db.VarChar(255)
+  region       String?   @db.VarChar(255)
+  sucursal     String?   @db.VarChar(255)
+  antiguedad   String?   @db.VarChar(255)
+  sexo         String?   @db.VarChar(20)
+  created_at   DateTime  @default(now()) @db.Timestamp(0)
+  updated_at   DateTime? @default(now()) @db.DateTime(0)
 
   @@id([id, idemp])
 }
