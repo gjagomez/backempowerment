@@ -11,7 +11,12 @@ const typeDefs = gql`
     createEnc(input: inputencexist): [encexist]
     getExistenc(input: inputidN): [encexist]
     loginAdmin(input: inputLogin): [login]
+<<<<<<< HEAD
     empresaEmpAd(input: inputEmpAdd): mensaje
+=======
+    createAdmin(input:inputAdminSave):[login]
+    empadminList(input:inputId):[login]
+>>>>>>> b05c84aac3db9000627a8b22c081e33a54661752
   }
 
   type usuarios {
@@ -50,8 +55,17 @@ const typeDefs = gql`
     estado: Int
     rol: String
   }
+<<<<<<< HEAD
   input inputEmpAdd {
     json: String!
+=======
+  input inputAdminSave{
+  idemp:String    
+  empresa:String
+  email:String   
+  nombre:String   
+  clave:String   
+>>>>>>> b05c84aac3db9000627a8b22c081e33a54661752
   }
   type empresas {
     id: ID
@@ -90,7 +104,6 @@ const typeDefs = gql`
     id: Int
     idemp: String
     empresa: String
-    codemp: Int
     email: String
     nombre: String
     clave: String
