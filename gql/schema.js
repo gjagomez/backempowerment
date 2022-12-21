@@ -5,7 +5,7 @@ const typeDefs = gql`
     empresasAll: [empresas]
   }
   type Mutation {
-    empresaAd(input: inputemp): empresas
+    empresaAd(input: inputemp): [empresas]
   }
 
   type empresas {
@@ -15,5 +15,10 @@ const typeDefs = gql`
     estado: String
     created_at: String
     updated_at: String
+  }
+
+  input inputemp {
+    idemp: String!
+    empresa: String!
   }
 `
