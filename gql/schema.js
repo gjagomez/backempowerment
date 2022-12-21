@@ -1,72 +1,13 @@
 const { gql } = require('apollo-server')
-//FORMAT DE FECHA 2021-01-01T03:53:00.000Z
+
 const typeDefs = gql`
   type Query {
     empresasAll: [empresas]
-    preguntas: [cat_preg]
   }
   type Mutation {
     empresaAd(input: inputemp): empresas
-    empresaDel(input: inputId): [empresas]
-    createEnc(input: inputencexist): [encexist]
-    getExistenc(input: inputidN): [encexist]
-    loginAdmin(input: inputLogin): [login]
-<<<<<<< HEAD
-    empresaEmpAd(input: inputEmpAdd): mensaje
-=======
-    createAdmin(input:inputAdminSave):[login]
-    empadminList(input:inputId):[login]
->>>>>>> b05c84aac3db9000627a8b22c081e33a54661752
   }
 
-  type usuarios {
-    id: ID
-  }
-  input inputusuario {
-    nombre: String
-  }
-  input inputId {
-    id: String!
-  }
-  input inputidN {
-    id: Int!
-  }
-  input inputemp {
-    idemp: String!
-    empresa: String!
-  }
-
-  input inputencexist {
-    idemp: Int
-    emp: String
-    encno: Int
-    fecin: String
-    fecfin: String
-  }
-  input inputLogin {
-    email: String
-    clave: String
-  }
-  input inputCreaAd {
-    idemp: Int
-    codemp: Int
-    email: String
-    clave: String
-    estado: Int
-    rol: String
-  }
-<<<<<<< HEAD
-  input inputEmpAdd {
-    json: String!
-=======
-  input inputAdminSave{
-  idemp:String    
-  empresa:String
-  email:String   
-  nombre:String   
-  clave:String   
->>>>>>> b05c84aac3db9000627a8b22c081e33a54661752
-  }
   type empresas {
     id: ID
     idemp: String
@@ -75,41 +16,4 @@ const typeDefs = gql`
     created_at: String
     updated_at: String
   }
-
-  type cat_preg {
-    id: ID
-    pregunta: String
-    tipo: String
-    corr: String
-    descrip: String
-    createat: String
-    created_at: String
-    updated_at: String
-  }
-  type mensaje {
-    mensaje: String
-  }
-  type encexist {
-    id: ID
-    idemp: ID
-    emp: String
-    encno: Int
-    estado: Int
-    fecin: String
-    fecfin: String
-    created_at: String
-    updated_at: String
-  }
-  type login {
-    id: Int
-    idemp: String
-    empresa: String
-    email: String
-    nombre: String
-    clave: String
-    created_at: String
-    updated_at: String
-  }
 `
-
-module.exports = typeDefs

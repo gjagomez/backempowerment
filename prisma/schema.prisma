@@ -7,89 +7,178 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model cat_preg {
-  id         Int       @id @default(autoincrement())
-  pregunta   String?   @db.VarChar(455)
-  tipo       String?   @db.VarChar(255)
-  corr       Int?
-  descrip    String?   @db.VarChar(255)
-  createat   DateTime  @default(dbgenerated("(curdate())")) @db.Date
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  updated_at DateTime? @default(now()) @db.DateTime(0)
+model CATEMP {
+  CODEMP      Int?
+  NOMBRE      String? @db.VarChar(150)
+  PUESTO      String? @db.VarChar(150)
+  CODGE       Int?
+  NOMGE       String? @db.VarChar(150)
+  PUESTOGE    String? @db.VarChar(150)
+  EMPRESA     String? @db.VarChar(150)
+  EMAILEMP    String? @db.VarChar(150)
+  EMAILJEF    String? @db.VarChar(150)
+  ROL         String? @db.VarChar(100)
+  REGION      String? @db.VarChar(100)
+  DEPARTAMENT String? @db.VarChar(200)
+  BODYEMAIL   String? @db.LongText
+  ID          Int     @id @default(autoincrement())
+  LENGUAJE    String? @db.VarChar(10)
+  ENCNO       Int?
+  SUCURSAL    String? @db.VarChar(150)
+  ANTIGUEDAD  Int?
 }
 
-model empresa {
-  id         Int       @id @default(autoincrement())
-  idemp      String    @default("") @db.VarChar(245)
-  empresa    String?   @db.VarChar(145)
-  estado     Int?      @default(0)
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  updated_at DateTime? @default(now()) @db.DateTime(0)
-
-  @@index([idemp, id], map: "id")
+model CATPUNRES {
+  ID          Int     @id @default(autoincrement())
+  DESCRIPCION String? @db.VarChar(100)
+  PUNT        Int?
 }
 
-model encexist {
-  id         Int       @id @default(autoincrement())
-  idemp      Int
-  emp        String?   @db.VarChar(255)
-  encno      Int?
-  estado     Int?      @default(0)
-  fecin      DateTime? @db.DateTime(0)
-  fecfin     DateTime? @db.DateTime(0)
-  created_at DateTime  @default(now()) @db.DateTime(0)
-  updated_at DateTime? @default(now()) @db.DateTime(0)
+model CAT_EMP {
+  ID      Int       @id @default(autoincrement())
+  EMPRESA Int?
+  FECHA   DateTime? @db.Date
 }
 
-model cat_put_rep {
-  id          Int     @id @default(autoincrement())
-  descripcion String? @db.VarChar(255)
-  punt        Int?
+model CAT_PREG {
+  ID       Int     @id
+  PREGUNTA String? @db.VarChar(1000)
+  TIPO     String? @db.VarChar(100)
+  CORR     Int?
+  DESCRIP  String? @db.VarChar(150)
 }
 
-model cat_resp {
-  id        Int       @id @default(autoincrement())
-  idpreg    Int?
-  resp      String?   @db.VarChar(255)
-  orden     Int?
-  create_at DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
-  update_at DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
-
-  @@index([idpreg], map: "IDX_cat_resp_idpreg")
+model CAT_RESP {
+  ID     Int     @id @default(autoincrement())
+  IDPREG Int?
+  RESP   String? @db.VarChar(150)
+  ORDEN  Int?
 }
 
-model usadmin {
-  id         Int       @default(autoincrement())
-  idemp      String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
-  empresa    String?   @db.VarChar(255)
-  email      String?   @db.VarChar(255)
-  nombre     String?   @db.VarChar(255)
-  clave      String?   @db.VarChar(255)
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  updated_at DateTime? @default(now()) @db.DateTime(0)
-
-  @@id([id, idemp])
+model EMAILBIEN {
+  ID       Int     @id @default(autoincrement())
+  EMAILEMP String? @db.VarChar(150)
+  NOMBRE   String? @db.VarChar(150)
+  CODEMP   String? @db.VarChar(150)
+  EMPRESA  String? @db.VarChar(150)
+  ENCNO    Int?
 }
 
-model catemp {
-  id           Int       @default(autoincrement())
-  idemp        String    @unique(map: "UK_catemp_idemp") @default("") @db.VarChar(255)
-  empresa      String?   @db.VarChar(255)
-  codemp       String?   @db.VarChar(255)
-  nombre       String?   @db.VarChar(255)
-  puesto       String?   @db.VarChar(255)
-  email        String?   @db.VarChar(255)
-  codje        String?   @db.VarChar(255)
-  nomje        String?   @db.VarChar(255)
-  puestoje     String?   @db.VarChar(255)
-  emailje      String?   @db.VarChar(255)
-  departamento String?   @db.VarChar(255)
-  region       String?   @db.VarChar(255)
-  sucursal     String?   @db.VarChar(255)
-  antiguedad   String?   @db.VarChar(255)
-  sexo         String?   @db.VarChar(20)
-  created_at   DateTime  @default(now()) @db.Timestamp(0)
-  updated_at   DateTime? @default(now()) @db.DateTime(0)
+model EMAILEST {
+  ID     Int       @id @default(autoincrement())
+  CODEMP Decimal?  @db.Decimal(30, 0)
+  EMAIL  String?   @db.VarChar(100)
+  ESTADO String?   @db.VarChar(1000)
+  ENCNO  Int?
+  EMP    String?   @db.VarChar(100)
+  FECHA  DateTime? @db.Date
+  HORA   DateTime? @db.DateTime(0)
+  TIP    Int?
+}
 
-  @@id([id, idemp])
+model EMPRESA {
+  ID       Int       @id @default(autoincrement())
+  EMPRESA  String?   @db.VarChar(100)
+  STATUS   Int?
+  LOGO     String?   @db.VarChar(255)
+  CREATEAT DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
+  UPDATEAT DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model EMP_RETROAL {
+  ENCNO    Int?
+  CODEMP   Int?
+  CODJEG   Int?
+  COMENTGE String? @db.LongText
+  COMENTUS String? @db.LongText
+  EMP      String? @db.VarChar(200)
+  ID       Int     @id @default(autoincrement())
+
+  @@ignore
+}
+
+model ENCEXIST {
+  ID     Int       @id @default(autoincrement())
+  EMP    String?   @db.VarChar(100)
+  ENCNO  Int?
+  FECHA  DateTime? @db.Date
+  STATUS Int?
+  ANIO   Int?
+  MES    Int?
+  FECIN  DateTime? @db.Date
+  FECFIN DateTime? @db.Date
+}
+
+model PL_ACC {
+  ID         Int       @id @default(autoincrement())
+  TIPO       String?   @db.VarChar(200)
+  PUNTO      String?   @db.VarChar(200)
+  FECINICIO  DateTime? @db.Date
+  FECFIN     DateTime? @db.Date
+  OBJETIVO   String?   @db.VarChar(250)
+  DESCRIP    String?   @db.LongText
+  CODEMP     Int?
+  EMP        String?   @db.VarChar(250)
+  ENCNO      Int?
+  FECHA      DateTime? @db.Date
+  ESTADO     Int?      @default(0)
+  FECHA_FIN  DateTime? @db.DateTime(0)
+  CODEMP_FIN Int?
+}
+
+model PL_ACCION {
+  ID     Int       @id @default(autoincrement())
+  EMP    String?   @db.VarChar(150)
+  ENCNO  Int?
+  CODGE  Int?
+  CODEMP Int?
+  PLANAC String?   @db.LongText
+  TIT    String?   @db.VarChar(150)
+  FEC    DateTime? @db.Date
+}
+
+model SNP {
+  ID     Int      @id @default(autoincrement())
+  VALOR  Int?
+  EMP    String?  @db.VarChar(250)
+  CODEMP Decimal? @db.Decimal(20, 0)
+  ENCNO  Int?
+}
+
+model TRNENCONT {
+  ID     Int       @id @default(autoincrement())
+  CODEMP Int?
+  FEC    DateTime? @db.Date
+  EMP    String?   @db.VarChar(150)
+  ENCNO  Int?
+}
+
+model TRN_EMPRESP {
+  ID     Int       @id @default(autoincrement())
+  ENCNO  Int?
+  IDPREG Int?
+  IDRESP Int?
+  RESP   String?   @db.VarChar(150)
+  EMP    String?   @db.VarChar(150)
+  FECHA  DateTime? @db.Date
+  CODEMP Int?
+}
+
+model TRN_LIBRE {
+  ID         Int      @id @default(autoincrement())
+  EMP        String?  @db.VarChar(150)
+  ENC        Int?
+  CODEMP     Decimal? @db.Decimal(30, 0)
+  COMENTARIO String?  @db.LongText
+}
+
+model US_ADMIN {
+  ID     Int     @id @default(autoincrement())
+  EMAIL  String? @db.VarChar(100)
+  CLAVE  String? @db.VarChar(100)
+  NOMBRE String? @db.VarChar(100)
+  EMP    String? @db.VarChar(255)
+
+  @@index([EMAIL], map: "IDX_US_ADMIN_EMAIL")
 }
