@@ -20,9 +20,7 @@ model CATEMP {
   ROL         String? @db.VarChar(100)
   REGION      String? @db.VarChar(100)
   DEPARTAMENT String? @db.VarChar(200)
-  BODYEMAIL   String? @db.LongText
   ID          Int     @id @default(autoincrement())
-  LENGUAJE    String? @db.VarChar(10)
   ENCNO       Int?
   SUCURSAL    String? @db.VarChar(150)
   ANTIGUEDAD  Int?
@@ -79,7 +77,7 @@ model EMAILEST {
 model EMPRESA {
   ID       Int       @id @default(autoincrement())
   EMPRESA  String?   @db.VarChar(100)
-  STATUS   Int?
+  STATUS   Int?      @default(0)
   LOGO     String?   @db.VarChar(255)
   CREATEAT DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
   UPDATEAT DateTime? @default(dbgenerated("(curdate())")) @db.DateTime(0)
@@ -103,9 +101,7 @@ model ENCEXIST {
   EMP    String?   @db.VarChar(100)
   ENCNO  Int?
   FECHA  DateTime? @db.Date
-  STATUS Int?
-  ANIO   Int?
-  MES    Int?
+  STATUS Int?      @default(0)
   FECIN  DateTime? @db.Date
   FECFIN DateTime? @db.Date
 }

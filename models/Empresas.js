@@ -1,74 +1,71 @@
 const { PrismaClient } = require('@prisma/client')
 prisma = new PrismaClient()
 
-async function saveEmp(input) {
-  const { idemp, empresa } = input
+async function getEmp() {
+  const allEmpresas = await prisma.EMPRESA.findMany()
+  return allEmpresas
+}
 
-  if (
-    idemp == undefined ||
-    idemp == '' ||
-    empresa == undefined ||
-    empresa == ''
-  ) {
-    return {
-      id: 0,
-      idemp: 'Id empresa es obligatorio',
-      empresa: 'Empresa es obligatorio',
-      estado: 0,
-      created_at: '',
-      updated_at: '',
-    }
-  }
-  const enc = await prisma.empresa.create({
+async function saveEmp(input) {
+  const enc = await prisma.EMPRESA.create({
     data: input,
   })
-  return enc
+  return getEmp()
 }
 
-async function delEmp({ id }) {
-  if (id == undefined || id == '') {
-    return [
-      {
-        id: 0,
-        idemp: 'id debe ser obligatorio',
-        empresa: '',
-        estado: 0,
-        created_at: '',
-        updated_at: '',
-      },
-    ]
-  }
-  const deleteEmp = await prisma.empresa.deleteMany({
+async function eliminaEmp({ ID }) {
+  const deleteEmp = await prisma.EMPRESA.deleteMany({
     where: {
-      idemp: id,
+      ID: parseInt(ID),
     },
   })
-  const allUsers = await prisma.empresa.findMany()
-
-  return allUsers
+  return getEmp()
 }
-async function getEmp() {
-  const allUsers = await prisma.empresa.findMany()
-  return allUsers
+
+async function getEncuesta({ ID }) {
+  console.log(ID)
+  const encexistente = await prisma.ENCEXIST.findMany({
+    where: {
+      EMP: ID,
+    },
+  })
+  return encexistente
+}
+
+async function saveEnc(input) {
+  const { EMP, ENCNO, FECHA, FECIN, FECFIN } = input
+  const createenc = await prisma.ENCEXIST.create({
+    data: {
+      EMP: EMP,
+      ENCNO: ENCNO,
+      FECHA: new Date(FECHA),
+      FECFIN: new Date(FECIN),
+      FECFIN: new Date(FECFIN),
+    },
+  })
+  const encexistente = await prisma.ENCEXIST.findMany({
+    where: {
+      EMP: createenc.EMP,
+    },
+  })
+  return encexistente
 }
 
 async function createEmpleado(input) {
   const jsonp = JSON.parse(input.json)
-  const enc = await prisma.catemp.createMany({
+  const enc = await prisma.CATEMP.createMany({
     data: jsonp,
     skipDuplicates: false,
   })
-  const resp = { message: enc.count }
+  const resp = { mensaje: enc.count }
   return resp
 }
-async function createEnc({ empid, encno }) {}
-async function endEnc({}) {}
 
 module.exports = {
   saveEmp,
-  delEmp,
+  eliminaEmp,
   getEmp,
-  createEnc,
-  endEnc,
   createEmpleado,
+  getEncuesta,
+  saveEnc,
 }
