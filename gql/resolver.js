@@ -4,6 +4,7 @@ const LoginEmp = require('../models/Loginempresas')
 const resolver = {
   Query: {
     empresasAll: () => empreSas.getEmp(),
+    encuesta: () => Encuesta.getEncPreg(),
   },
   Mutation: {
     empresaAd: (_, { input }) => empreSas.saveEmp(input),
@@ -11,6 +12,9 @@ const resolver = {
     empresaallEnc: (_, { input }) => empreSas.getEncuesta(input),
     empresaAdEnc: (_, { input }) => empreSas.saveEnc(input),
     empresaEmpAd: (_, { input }) => empreSas.createEmpleado(input),
+    empresaEmpleado: (_, { input }) => empreSas.getEmpleados(input),
+    empresaUpdateemp: (_, { input }) => empreSas.updateEmpleado(input),
+    loginadmin: (_, { input }) => LoginEmp.LoginAdmin(input),
   },
 }
 

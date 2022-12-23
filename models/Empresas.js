@@ -23,7 +23,6 @@ async function eliminaEmp({ ID }) {
 }
 
 async function getEncuesta({ ID }) {
-  console.log(ID)
   const encexistente = await prisma.ENCEXIST.findMany({
     where: {
       EMP: ID,
@@ -51,6 +50,66 @@ async function saveEnc(input) {
   return encexistente
 }
 
+async function getEmpleados(input) {
+  const { EMP, ENC } = input
+
+  const getEmpleados = await prisma.CATEMP.findMany({
+    where: {
+      EMPRESA: {
+        equals: EMP, // Default value: default
+      },
+      ENCNO: {
+        equals: parseInt(ENC), // Default mode
+      },
+    },
+  })
+  return getEmpleados
+}
+async function updateEmpleado(input) {
+  const {
+    ID,
+    CODEMP,
+    NOMBRE,
+    PUESTO,
+    CODGE,
+    NOMGE,
+    PUESTOGE,
+    EMPRESA,
+    EMAILEMP,
+    EMAILJEF,
+    ROL,
+    REGION,
+    DEPARTAMENT,
+    ENCNO,
+    SUCURSAL,
+    ANTIGUEDAD,
+  } = JSON.parse(input.json)
+  const updateUsers = await prisma.CATEMP.updateMany({
+    where: {
+      ID: {
+        equals: ID,
+      },
+    },
+    data: {
+      CODEMP: CODEMP,
+      NOMBRE: NOMBRE,
+      PUESTO: PUESTO,
+      CODGE: CODGE,
+      CODGE: CODGE,
+      PUESTOGE: PUESTOGE,
+      NOMGE: NOMGE,
+      EMAILEMP: EMAILEMP,
+      EMAILJEF: EMAILJEF,
+      REGION: REGION,
+      DEPARTAMENT: DEPARTAMENT,
+      ENCNO: ENCNO,
+      SUCURSAL: SUCURSAL,
+      ANTIGUEDAD: ANTIGUEDAD,
+    },
+  })
+  const resp = { mensaje: updateUsers.count }
+  return resp
+}
 async function createEmpleado(input) {
   const jsonp = JSON.parse(input.json)
   const enc = await prisma.CATEMP.createMany({
@@ -68,4 +127,6 @@ module.exports = {
   createEmpleado,
   getEncuesta,
   saveEnc,
+  getEmpleados,
+  updateEmpleado,
 }
