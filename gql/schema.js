@@ -18,6 +18,7 @@ const typeDefs = gql`
     empresaEmpleado(input: inputEmpleados): [empleados]
     empresaUpdateemp(input: inputEmpAdd): mensaje
     loginadmin(input: inputLogin): mensaje
+    empresaGetEmpleado(input: inputID): empleados
   }
   type encuesta {
     ID: ID

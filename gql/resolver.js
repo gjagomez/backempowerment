@@ -15,6 +15,7 @@ const resolver = {
     empresaEmpleado: (_, { input }) => empreSas.getEmpleados(input),
     empresaUpdateemp: (_, { input }) => empreSas.updateEmpleado(input),
     loginadmin: (_, { input }) => LoginEmp.LoginAdmin(input),
+    empresaGetEmpleado: (_, { input }) => empreSas.getDatosEmpleados(input),
   },
 }
 

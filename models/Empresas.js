@@ -119,7 +119,17 @@ async function createEmpleado(input) {
   const resp = { mensaje: enc.count }
   return resp
 }
+async function getDatosEmpleados(input) {
+  const getEmpleados = await prisma.CATEMP.findMany({
+    where: {
+      ID: {
+        equals: parseInt(input.ID), // Default value: default
+      },
+    },
+  })
 
+  return getEmpleados[0]
+}
 module.exports = {
   saveEmp,
   eliminaEmp,
@@ -129,4 +139,5 @@ module.exports = {
   saveEnc,
   getEmpleados,
   updateEmpleado,
+  getDatosEmpleados,
 }
