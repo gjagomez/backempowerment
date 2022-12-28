@@ -33,20 +33,50 @@ async function getEncuesta({ ID }) {
 
 async function saveEnc(input) {
   const { EMP, ENCNO, FECHA, FECIN, FECFIN } = input
+
+  const res = await prisma.$queryRaw`SELECT ENCNO,STATUS FROM ENCEXIST  WHERE EMP =${EMP} AND ENCNO =(SELECT MAX(ENCNO) FROM ENCEXIST WHERE EMP =${EMP})`
+  let encuesta = 0
+  let estado = ''
+  if (!res.length) {
+    encuesta = '1'
+    estado = ''
+  } else {
+    encuesta = parseInt(res[0].ENCNO) + 1
+    estado = res[0].STATUS
+  }
+
+  if (estado === '1' || estado === 1) {
+    const resp = [
+      {
+        ID: 0,
+        EMP: 'ERROR HAY UNA ENCUESTA EN CURSO',
+        ENCNO: 0,
+        FECHA: '2022-12-28T00:00:00.000Z',
+        STATUS: 1,
+        FECIN: '2022-12-28T00:00:00.000Z',
+        FECFIN: ' 2023-01-19T00:00:00.000Z',
+      },
+    ]
+    return resp
+  }
+
   const createenc = await prisma.ENCEXIST.create({
     data: {
       EMP: EMP,
-      ENCNO: ENCNO,
+      ENCNO: parseInt(encuesta),
       FECHA: new Date(FECHA),
-      FECFIN: new Date(FECIN),
+      STATUS: 1,
+      FECIN: new Date(FECIN),
       FECFIN: new Date(FECFIN),
     },
   })
+
   const encexistente = await prisma.ENCEXIST.findMany({
     where: {
       EMP: createenc.EMP,
     },
   })
+
   return encexistente
 }
 
@@ -95,9 +125,9 @@ async function updateEmpleado(input) {
       NOMBRE: NOMBRE,
       PUESTO: PUESTO,
       CODGE: CODGE,
-      CODGE: CODGE,
-      PUESTOGE: PUESTOGE,
       NOMGE: NOMGE,
+      PUESTOGE: PUESTOGE,
+      EMPRESA: EMPRESA,
       EMAILEMP: EMAILEMP,
       EMAILJEF: EMAILJEF,
       REGION: REGION,
@@ -116,8 +146,12 @@ async function createEmpleado(input) {
     data: jsonp,
     skipDuplicates: false,
   })
-  const resp = { mensaje: enc.count }
-  return resp
+
+  const token = {
+    mensaje: enc.count,
+  }
+
+  return token
 }
 async function getDatosEmpleados(input) {
   const getEmpleados = await prisma.CATEMP.findMany({

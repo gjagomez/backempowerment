@@ -30,6 +30,7 @@ const typeDefs = gql`
   type mensaje {
     mensaje: String
   }
+
   type encuestas {
     ID: ID
     EMP: String
