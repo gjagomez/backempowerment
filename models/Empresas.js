@@ -96,6 +96,7 @@ async function getEmpleados(input) {
   return getEmpleados
 }
 async function updateEmpleado(input) {
+  console.log(input)
   const {
     ID,
     CODEMP,
@@ -117,14 +118,14 @@ async function updateEmpleado(input) {
   const updateUsers = await prisma.CATEMP.updateMany({
     where: {
       ID: {
-        equals: ID,
+        equals: parseInt(ID),
       },
     },
     data: {
-      CODEMP: CODEMP,
+      CODEMP: parseInt(CODEMP),
       NOMBRE: NOMBRE,
       PUESTO: PUESTO,
-      CODGE: CODGE,
+      CODGE: parseInt(CODGE),
       NOMGE: NOMGE,
       PUESTOGE: PUESTOGE,
       EMPRESA: EMPRESA,
@@ -132,9 +133,9 @@ async function updateEmpleado(input) {
       EMAILJEF: EMAILJEF,
       REGION: REGION,
       DEPARTAMENT: DEPARTAMENT,
-      ENCNO: ENCNO,
+      ENCNO: parseInt(ENCNO),
       SUCURSAL: SUCURSAL,
-      ANTIGUEDAD: ANTIGUEDAD,
+      ANTIGUEDAD: parseInt(ANTIGUEDAD),
     },
   })
   const resp = { mensaje: updateUsers.count }
