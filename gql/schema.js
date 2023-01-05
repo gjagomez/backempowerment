@@ -19,6 +19,15 @@ const typeDefs = gql`
     empresaUpdateemp(input: inputEmpAdd): mensaje
     loginadmin(input: inputLogin): mensaje
     empresaGetEmpleado(input: inputID): empleados
+    encanswer(input: inputEmpAdd): mensaje
+    encvalid(input: inputValid): [validEnc]
+  }
+  type validEnc {
+    ID: ID
+    CODEMP: ID
+    FEC: Date
+    EMP: String
+    ENCNO: Int
   }
   type encuesta {
     ID: ID
@@ -74,6 +83,11 @@ const typeDefs = gql`
     CLAVE: String
     NOMBRE: String
     EMP: String
+  }
+  input inputValid {
+    codemp: Int
+    encno: Int
+    emp: String
   }
   input inputLogin {
     email: String

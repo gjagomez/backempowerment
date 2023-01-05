@@ -16,6 +16,8 @@ const resolver = {
     empresaUpdateemp: (_, { input }) => empreSas.updateEmpleado(input),
     loginadmin: (_, { input }) => LoginEmp.LoginAdmin(input),
     empresaGetEmpleado: (_, { input }) => empreSas.getDatosEmpleados(input),
+    encanswer: (_, { input }) => Encuesta.answerenc(input),
+    encvalid: (_, { input }) => Encuesta.validEnc(input),
   },
 }
 
