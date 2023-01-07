@@ -75,11 +75,11 @@ async function ListUserAdmin({ id }) {
   return ListUser
 }
 
-async function menuNav({ id }) {
+async function menuNav({ ID }) {
   const result = await prisma.NAVIGATION.findMany({
     where: {
       rol: {
-        equals: id,
+        equals: ID,
       },
     },
   })
