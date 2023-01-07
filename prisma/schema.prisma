@@ -179,3 +179,23 @@ model US_ADMIN {
 
   @@index([EMAIL], map: "IDX_US_ADMIN_EMAIL")
 }
+
+model CHILDREN {
+  id       Int     @id @default(autoincrement())
+  header   String? @db.VarChar(255)
+  iconName String? @db.VarChar(255)
+  link     String? @db.VarChar(255)
+  index    String? @db.VarChar(255)
+  rol      String? @db.VarChar(255)
+  children String? @db.VarChar(100)
+
+  @@index([id], map: "IDX_CHILDREN_id")
+}
+
+model NAVIGATION {
+  id     Int     @id @default(autoincrement())
+  option String? @db.VarChar(255)
+  rol    String? @db.VarChar(255)
+
+  @@index([id], map: "IDX_NAVIGATION_id")
+}

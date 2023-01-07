@@ -21,6 +21,7 @@ const typeDefs = gql`
     empresaGetEmpleado(input: inputID): empleados
     encanswer(input: inputEmpAdd): mensaje
     encvalid(input: inputValid): [validEnc]
+    menuNav(input: inputIDstring): mensaje
   }
   type validEnc {
     ID: ID
@@ -117,6 +118,9 @@ const typeDefs = gql`
 
   input inputID {
     ID: ID
+  }
+  input inputIDstring {
+    ID: String!
   }
 `
 

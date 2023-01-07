@@ -75,8 +75,48 @@ async function ListUserAdmin({ id }) {
   return ListUser
 }
 
+async function menuNav({ id }) {
+  const result = await prisma.NAVIGATION.findMany({
+    where: {
+      rol: {
+        equals: id,
+      },
+    },
+  })
+
+  const promises = result.map(async (x) => {
+    const result = await prisma.CHILDREN.findMany({
+      where: {
+        children: {
+          equals: x.option,
+        },
+        rol: {
+          equals: x.rol,
+        },
+      },
+      select: {
+        header: true,
+        iconName: true,
+        link: true,
+        index: true,
+      },
+    })
+    const subMenu = {
+      option: x.option,
+      children: result,
+    }
+    return subMenu
+  })
+
+  const token = {
+    mensaje: JSON.stringify(await Promise.all(promises)),
+  }
+  return token
+}
+
 module.exports = {
   LoginAdmin,
   CreateUser,
   ListUserAdmin,
+  menuNav,
 }
