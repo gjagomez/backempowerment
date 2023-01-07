@@ -8,15 +8,18 @@ async function getEncPreg() {
 
 async function answerenc(input) {
   const jsonp = JSON.parse(input.json)
-
+  const jsonEnc = jsonp.encuesta[0]
   const enc = await prisma.TRN_EMPRESP.createMany({
-    data: jsonp,
+    data: jsonp.encuesta[0],
     skipDuplicates: false,
   })
-  const codigoemp = jsonp[0].CODEMP
-  const empresa = jsonp[0].EMP
-  const encuestano = jsonp[0].ENCNO
 
+  const codigoemp = jsonEnc[0].CODEMP
+  const empresa = jsonEnc[0].EMP
+  const encuestano = jsonEnc[0].ENCNO
+
+  anserLibre(jsonp.comentario)
+  answerNPS(jsonp.recomendaEmpresa)
   encreganswer(codigoemp, empresa, encuestano)
   const token = {
     mensaje: enc.count,
@@ -24,6 +27,29 @@ async function answerenc(input) {
 
   return token
 }
+async function answerNPS({ RESP, EMP, CODEMP, ENCNO }) {
+  const reslibre = await prisma.SNP.createMany({
+    data: {
+      VALOR: parseInt(RESP),
+      EMP: EMP,
+      CODEMP: CODEMP,
+      ENCNO: parseInt(ENCNO),
+    },
+  })
+  return reslibre
+}
+async function anserLibre({ EMP, ENCNO, CODEMP, RESP }) {
+  const reslibre = await prisma.TRN_LIBRE.createMany({
+    data: {
+      EMP: EMP,
+      ENC: ENCNO,
+      CODEMP: CODEMP,
+      COMENTARIO: RESP,
+    },
+  })
+  return reslibre
+}
+
 async function encreganswer(codeemp, emp, encno) {
   const regEnc = await prisma.TRNENCONT.create({
     data: {
