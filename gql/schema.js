@@ -17,7 +17,7 @@ const typeDefs = gql`
     empresaEmpAd(input: inputEmpAdd): mensaje
     empresaEmpleado(input: inputEmpleados): [empleados]
     empresaUpdateemp(input: inputEmpAdd): mensaje
-    loginadmin(input: inputLogin): mensaje
+    loginadmin(input: inputLogin): mensajeLogin
     empresaGetEmpleado(input: inputID): empleados
     encanswer(input: inputEmpAdd): mensaje
     encvalid(input: inputValid): [validEnc]
@@ -39,7 +39,10 @@ const typeDefs = gql`
   type mensaje {
     mensaje: String
   }
-
+  type mensajeLogin {
+    mensaje: String
+    estado: Int
+  }
   type encuestas {
     ID: ID
     EMP: String

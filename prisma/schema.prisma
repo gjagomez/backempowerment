@@ -175,6 +175,7 @@ model US_ADMIN {
   CLAVE  String? @db.VarChar(100)
   NOMBRE String? @db.VarChar(100)
   EMP    String? @db.VarChar(255)
+  ROL    String? @db.VarChar(100)
 
   @@index([EMAIL], map: "IDX_US_ADMIN_EMAIL")
 }

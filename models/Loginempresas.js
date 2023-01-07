@@ -7,10 +7,10 @@ async function LoginAdmin({ email, clave }) {
     const Usuario = await prisma.US_ADMIN.findMany({
       where: {
         EMAIL: {
-          equals: email, // Default value: default
+          equals: email,
         },
         CLAVE: {
-          equals: clave, // Default mode
+          equals: clave,
         },
       },
       select: {
@@ -18,14 +18,25 @@ async function LoginAdmin({ email, clave }) {
         EMAIL: true,
         NOMBRE: true,
         EMP: true,
+        ROL: true,
       },
     })
 
-    const token = {
-      mensaje: jwt.sign(Usuario[0], 'empowerment', { expiresIn: '1800s' }),
-    }
+    if (Usuario.length === 0) {
+      const token = {
+        mensaje: 'Usuario y contraseña incorrecto',
+        estado: 1,
+      }
 
-    return token
+      return token
+    } else {
+      const token = {
+        mensaje: jwt.sign(Usuario[0], 'empowerment', { expiresIn: '1800s' }),
+        estado: 0,
+      }
+
+      return token
+    }
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // console.log(e.code)
