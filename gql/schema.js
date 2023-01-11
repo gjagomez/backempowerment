@@ -25,6 +25,9 @@ const typeDefs = gql`
     emprefal(input: inputIDstring): [listEmp]
     encChartLine(input: inputParEnc): mensaje
     encChatTot(input: inputParEnc): mensaje
+    encComent(input: inputCouch): mensaje
+    punteoMP4(input: inputCouch): mensaje
+    punteo(input: inputCouch): mensaje
   }
   type listEmp {
     CODEMP: ID
@@ -135,6 +138,11 @@ const typeDefs = gql`
 
   input inputParEnc {
     EMP: String!
+    ENC: Int
+  }
+
+  input inputCouch {
+    CODJE: String!
     ENC: Int
   }
 `

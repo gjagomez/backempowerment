@@ -1,6 +1,8 @@
 const empreSas = require('../models/Empresas')
 const Encuesta = require('../models/Encuesta')
 const LoginEmp = require('../models/Loginempresas')
+const Comentarios = require('../models/EncuestaCom')
+const Punteos = require('../models/EncuestaPunteo')
 const resolver = {
   Query: {
     empresasAll: () => empreSas.getEmp(),
@@ -22,6 +24,9 @@ const resolver = {
     emprefal: (_, { input }) => Encuesta.personasFaltante(input),
     encChartLine: (_, { input }) => Encuesta.chatsLine(input),
     encChatTot: (_, { input }) => Encuesta.chartTotal(input),
+    encComent: (_, { input }) => Comentarios.getComentario(input),
+    punteoMP4: (_, { input }) => Punteos.getPunteoMP4(input),
+    punteo: (_, { input }) => Punteos.getPunteo(input),
   },
 }
 
