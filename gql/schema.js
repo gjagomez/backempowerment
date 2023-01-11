@@ -22,6 +22,16 @@ const typeDefs = gql`
     encanswer(input: inputEmpAdd): mensaje
     encvalid(input: inputValid): [validEnc]
     menuNav(input: inputIDstring): mensaje
+    emprefal(input: inputIDstring): [listEmp]
+    encChartLine(input: inputParEnc): mensaje
+    encChatTot(input: inputParEnc): mensaje
+  }
+  type listEmp {
+    CODEMP: ID
+    NOMBRE: String
+    EMAILEMP: String
+    PUESTO: String
+    NOMGE: String
   }
   type validEnc {
     ID: ID
@@ -121,6 +131,11 @@ const typeDefs = gql`
   }
   input inputIDstring {
     ID: String!
+  }
+
+  input inputParEnc {
+    EMP: String!
+    ENC: Int
   }
 `
 

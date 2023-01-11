@@ -19,6 +19,9 @@ const resolver = {
     encanswer: (_, { input }) => Encuesta.answerenc(input),
     encvalid: (_, { input }) => Encuesta.validEnc(input),
     menuNav: (_, { input }) => LoginEmp.menuNav(input),
+    emprefal: (_, { input }) => Encuesta.personasFaltante(input),
+    encChartLine: (_, { input }) => Encuesta.chatsLine(input),
+    encChatTot: (_, { input }) => Encuesta.chartTotal(input),
   },
 }
 
